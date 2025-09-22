@@ -1,0 +1,327 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Themeable Colors - Restored to Original Vibe */
+    --background: 210 11% 7%; /* #0f1211 */
+    --foreground: 160 14% 93%; /* #e7eceb */
+
+    --muted: 240 2% 16%; /* #27272a */
+    --muted-foreground: 160 14% 93% / 0.7; /* rgba(231, 236, 235, 0.7) */
+    --muted-foreground-light: 160 14% 93% / 0.5; /* rgba(231, 236, 235, 0.5) */
+    --muted-foreground-dark: 160 14% 93% / 0.6; /* rgba(231, 236, 235, 0.6) */
+
+    --card: 220 17% 98% / 0.01;
+    --card-foreground: 160 14% 93%;
+
+    --popover: 210 11% 7%;
+    --popover-foreground: 160 14% 93%;
+
+    /* Primary Accent Colors */
+    --primary: 165 96% 71%; /* #78fcd6 */
+    --primary-foreground: 160 8% 6%; /* #0d0f0e */
+    --primary-dark: 160 100% 50%; /* #00ffb6 */
+    --primary-light: 160 48% 87%; /* New variable for lighter teal/green shades */
+
+    /* Secondary Accent Colors (for buttons, etc.) */
+    --secondary: 160 14% 93%; /* #e7eceb */
+    --secondary-foreground: 165 14% 8%; /* #141a18 */
+
+    --accent: 240 2% 25%; /* #3f3f42 */
+    --accent-foreground: 240 2% 96%; /* #f4f4f5 */
+
+    --border: 240 100% 100% / 0.08; /* rgba(255, 255, 255, 0.08) */
+    --border-light: 210 17% 6% / 0.1; /* rgba(16,24,40,0.1) */
+    --border-dark: 210 17% 6% / 0.05; /* rgba(16,24,40,0.05) */
+
+    --ring: 165 96% 71%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    cursor: none !important;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Added fluent typography improvements */
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-variant-ligatures: contextual;
+    letter-spacing: -0.011em;
+    line-height: 1.5;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid hsl(var(--primary));
+    border-radius: 50%;
+    background: transparent;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease;
+    mix-blend-mode: difference;
+  }
+
+  /* Hover effect for interactive elements */
+  a:hover ~ body::before,
+  button:hover ~ body::before,
+  [role="button"]:hover ~ body::before {
+    width: 30px;
+    height: 30px;
+    border-width: 3px;
+  }
+
+  /* Enhanced heading typography for fluent appearance */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-variant-ligatures: contextual;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+  }
+
+  /* Improved paragraph and text rendering */
+  p,
+  span,
+  div {
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-variant-ligatures: contextual;
+  }
+
+  /* Adding soft moving gradient animations */
+  @keyframes gradient-shift {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes gradient-pulse {
+    0%,
+    100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes gradient-float {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    33% {
+      transform: translateY(-10px) rotate(1deg);
+    }
+    66% {
+      transform: translateY(5px) rotate(-1deg);
+    }
+  }
+
+  /* Adding global moving gradient background */
+  @keyframes global-gradient-flow {
+    0% {
+      background-position: 0% 0%;
+    }
+    25% {
+      background-position: 100% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    75% {
+      background-position: 0% 100%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }
+
+  @keyframes floating-orb-1 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    25% {
+      transform: translate(20px, -30px) scale(1.1);
+    }
+    50% {
+      transform: translate(-15px, -20px) scale(0.9);
+    }
+    75% {
+      transform: translate(25px, 10px) scale(1.05);
+    }
+  }
+
+  @keyframes floating-orb-2 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(-25px, 20px) scale(1.2);
+    }
+    66% {
+      transform: translate(30px, -15px) scale(0.8);
+    }
+  }
+
+  @keyframes floating-orb-3 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    20% {
+      transform: translate(15px, -25px) scale(1.1);
+    }
+    40% {
+      transform: translate(-20px, 15px) scale(0.9);
+    }
+    60% {
+      transform: translate(10px, -10px) scale(1.15);
+    }
+    80% {
+      transform: translate(-10px, 25px) scale(0.95);
+    }
+  }
+
+  /* Gradient utility classes */
+  .gradient-animated {
+    background: linear-gradient(
+      -45deg,
+      hsl(var(--primary) / 0.1),
+      hsl(var(--primary-light) / 0.15),
+      hsl(var(--primary) / 0.08),
+      hsl(var(--primary-light) / 0.12)
+    );
+    background-size: 400% 400%;
+    animation: gradient-shift 8s ease-in-out infinite;
+  }
+
+  .gradient-orb {
+    background: radial-gradient(
+      circle,
+      hsl(var(--primary) / 0.2) 0%,
+      hsl(var(--primary-light) / 0.1) 40%,
+      transparent 70%
+    );
+    animation: gradient-pulse 6s ease-in-out infinite, gradient-float 12s ease-in-out infinite;
+  }
+
+  /* Global gradient background */
+  .global-gradient-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+      45deg,
+      hsl(var(--primary) / 0.03),
+      hsl(var(--primary-light) / 0.05),
+      hsl(var(--primary) / 0.02),
+      hsl(var(--primary-light) / 0.04),
+      hsl(var(--primary) / 0.03)
+    );
+    background-size: 300% 300%;
+    animation: global-gradient-flow 20s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Floating gradient orbs */
+  .floating-orb {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(40px);
+    opacity: 0.4;
+  }
+
+  .floating-orb-1 {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    left: 10%;
+    background: radial-gradient(circle, hsl(var(--primary) / 0.3), transparent);
+    animation: floating-orb-1 25s ease-in-out infinite;
+    z-index: 1;
+  }
+
+  .floating-orb-2 {
+    width: 300px;
+    height: 300px;
+    top: 60%;
+    right: 15%;
+    background: radial-gradient(circle, hsl(var(--primary-light) / 0.25), transparent);
+    animation: floating-orb-2 30s ease-in-out infinite;
+    z-index: 1;
+  }
+
+  .floating-orb-3 {
+    width: 150px;
+    height: 150px;
+    bottom: 20%;
+    left: 20%;
+    background: radial-gradient(circle, hsl(var(--primary) / 0.35), transparent);
+    animation: floating-orb-3 22s ease-in-out infinite;
+    z-index: 1;
+  }
+
+  .floating-orb-4 {
+    width: 250px;
+    height: 250px;
+    top: 30%;
+    right: 30%;
+    background: radial-gradient(circle, hsl(var(--primary-light) / 0.2), transparent);
+    animation: floating-orb-1 28s ease-in-out infinite reverse;
+    z-index: 1;
+  }
+
+  .floating-orb-5 {
+    width: 180px;
+    height: 180px;
+    bottom: 40%;
+    right: 10%;
+    background: radial-gradient(circle, hsl(var(--primary) / 0.28), transparent);
+    animation: floating-orb-2 35s ease-in-out infinite reverse;
+    z-index: 1;
+  }
+
+  /* Performance optimization */
+  .gradient-animated,
+  .gradient-orb,
+  .global-gradient-bg,
+  .floating-orb {
+    will-change: transform, opacity;
+  }
+
+  /* Respect user preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .gradient-animated,
+    .gradient-orb,
+    .global-gradient-bg,
+    .floating-orb {
+      animation: none;
+    }
+  }
+}
